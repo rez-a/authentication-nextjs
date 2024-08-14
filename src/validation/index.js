@@ -6,7 +6,7 @@ const constantsValidation = {
   email: Yup.string()
     .email('please enter valid email address')
     .required('this field is required!'),
-  phoneNumber: Yup.string()
+  phone_number: Yup.string()
     .matches(phoneNumberRJX, 'please enter valid phone number')
     .required('this field is required!'),
   password: Yup.string().min(

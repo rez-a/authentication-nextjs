@@ -11,11 +11,11 @@ export default function Home() {
           height={37}
           priority
         />
-        <p>next-auth</p>
+        <div>next-auth</div>
       </div>
 
       <div className="flex items-center justify-around gap-4 mt-16">
-        <p className="card-link">
+        <div className="card-link">
           <h2>
             admin signup <span>-&gt;</span>
           </h2>
@@ -25,8 +25,8 @@ export default function Home() {
             rel="noopener noreferrer"
             className="link"
           ></a>
-        </p>
-        <p className="card-link">
+        </div>
+        <div className="card-link">
           <h2>
             admin signin <span>-&gt;</span>
           </h2>
@@ -36,8 +36,8 @@ export default function Home() {
             rel="noopener noreferrer"
             className="link"
           ></a>
-        </p>
-        <p className="card-link">
+        </div>
+        <div className="card-link">
           <h2>
             admin forget password <span>-&gt;</span>
           </h2>
@@ -47,8 +47,8 @@ export default function Home() {
             rel="noopener noreferrer"
             className="link"
           ></a>
-        </p>
-        <p className="card-link">
+        </div>
+        <div className="card-link">
           <h2>
             user signin with otp <span>-&gt;</span>
           </h2>
@@ -58,7 +58,7 @@ export default function Home() {
             rel="noopener noreferrer"
             className="link"
           ></a>
-        </p>
+        </div>
       </div>
     </>
   );

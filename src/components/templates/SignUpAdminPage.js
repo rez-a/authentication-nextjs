@@ -1,26 +1,45 @@
 'use client';
 import { signupAdminSchema } from '@/validation';
 import { Field, Form, Formik } from 'formik';
-import React from 'react';
+import React, { useContext } from 'react';
 import FormInput from '../shared/FormInput';
 import SubmitterButton from '../shared/SubmitterButton';
 import ErrorMsg from '../shared/ErrorMsg';
+import { handleRegister } from '@/actions/auth/admin';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import { UserContext } from '@/context/UserProvider';
 
 const SignUpAdminPage = () => {
+  const router = useRouter();
+  const { setUser } = useContext(UserContext);
+
+  const register = async (values) => {
+    const res = await handleRegister(values);
+    if (res.status) {
+      setUser(res.email);
+      toast.success(res.message);
+      router.push('/admin');
+      return;
+    }
+
+    toast.error(res.message);
+  };
+
   return (
     <div className="form-container">
       <Formik
         initialValues={{
           email: '',
-          phoneNumber: '',
+          phone_number: '',
           password: '',
           confirmPassword: '',
           terms: false,
         }}
         validationSchema={signupAdminSchema}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={async (values) => register(values)}
       >
-        {() => (
+        {({ isSubmitting }) => (
           <Form className="max-w-sm mx-auto">
             <FormInput
               type="email"
@@ -31,7 +50,7 @@ const SignUpAdminPage = () => {
             />
             <FormInput
               id="phone-number"
-              name="phoneNumber"
+              name="phone_number"
               placeholder="09*********"
               label="Your phone number"
             />
@@ -65,7 +84,7 @@ const SignUpAdminPage = () => {
                   I agree with the
                   <a
                     href="#"
-                    className="text-blue-600 hover:underline dark:text-blue-500"
+                    className="text-blue-600 hover:underline dark:text-blue-500 ms-1"
                   >
                     terms and conditions
                   </a>
@@ -73,7 +92,10 @@ const SignUpAdminPage = () => {
               </div>
               <ErrorMsg name="terms" />
             </div>
-            <SubmitterButton text="Register new account" />
+            <SubmitterButton
+              text="Register new account"
+              isSubmitting={isSubmitting}
+            />
           </Form>
         )}
       </Formik>
